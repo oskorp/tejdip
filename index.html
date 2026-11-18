@@ -466,8 +466,9 @@ footer p{margin:6px 0;color:var(--ivory-dim)}
   </footer>
 </main>
 
-<div id="nowplaying" aria-live="polite"><b>राग भूपाळी</b> · बासरी, तानपुरा, तबला (केहरवा)</div>
-<button id="music" type="button" aria-label="संगीत बंद/सुरू करा" title="राग भूपाळी"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
+<audio id="bgm" src="kalyanam.mp3" loop preload="auto"></audio>
+<div id="nowplaying" aria-live="polite"><b>कल्याणम्</b> · मंगल संगीत</div>
+<button id="music" type="button" aria-label="संगीत बंद/सुरू करा" title="कल्याणम्"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -664,14 +665,23 @@ function schedule(){
 }
 function startEnsemble(){ if(!AC||schedTimer) return; nextT=AC.currentTime+.12; schedTimer=setInterval(schedule,50); schedule(); }
 function stopEnsemble(){ clearInterval(schedTimer); schedTimer=null; }
-function startDrone(){ startEnsemble(); }
+/* Background track: the family's chosen "Kalyanam" recording (kalyanam.mp3).
+   The synthesised ensemble above stays unused; only its temple bells are kept for moments. */
+const BGM = document.getElementById('bgm'); let fadeRAF=null;
+function fadeTo(target,ms){
+  cancelAnimationFrame(fadeRAF); const from=BGM.volume, t0=performance.now();
+  const f=now=>{ const k=Math.min(1,(now-t0)/ms); BGM.volume=from+(target-from)*k;
+    if(k<1) fadeRAF=requestAnimationFrame(f); else if(target===0) BGM.pause(); };
+  fadeRAF=requestAnimationFrame(f);
+}
+function startDrone(){}
 function setMusic(on){
-  if(!AC) return; musicOn=on;
-  if(AC.state==='suspended') AC.resume();
-  master.gain.cancelScheduledValues(AC.currentTime);
-  master.gain.setValueAtTime(master.gain.value, AC.currentTime);
-  master.gain.linearRampToValueAtTime(on?.8:0, AC.currentTime+.8);
-  if(on) startEnsemble(); else setTimeout(()=>{ if(!musicOn) stopEnsemble(); }, 900);
+  musicOn=on;
+  if(AC){ if(AC.state==='suspended') AC.resume();
+    master.gain.cancelScheduledValues(AC.currentTime); master.gain.setValueAtTime(master.gain.value, AC.currentTime);
+    master.gain.linearRampToValueAtTime(on?.45:0, AC.currentTime+.6); }          // bells only
+  if(on){ BGM.volume=Math.min(BGM.volume,.05); const p=BGM.play(); if(p&&p.catch) p.catch(()=>{ musicOn=false; $('#music').classList.add('off'); }); fadeTo(.85,1800); }
+  else fadeTo(0,900);
   $('#music').classList.toggle('off',!on);
   const np=$('#nowplaying'); if(np){ np.classList.toggle('show',on); clearTimeout(np._t); if(on) np._t=setTimeout(()=>np.classList.remove('show'),5000); }
 }
