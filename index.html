@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>तेजस ♥ दिपाली साखरपुडा</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Marathi:ital@0;1&family=Marcellus&display=swap">
+<style>
+/* Layout: a carved wada door that opens onto one long scroll — toran, couple under a mandap arch, rings that join on scroll, details, rangoli countdown, programme, blessings. Single deliberate look: kumkum maroon + temple gold. */
+:root{
+  --night:#2a060d;
+  --maroon:#4a0c18;
+  --kumkum:#9c1530;
+  --gold:#e2b04a;
+  --gold-hi:#f7dc95;
+  --marigold:#f28a17;
+  --ivory:#fbf0d9;
+  --ivory-dim:#e9d6b4;
+  --leaf:#3d7a37;
+  --f-display:"Yatra One","Tiro Devanagari Marathi","Noto Sans Devanagari",serif;
+  --f-body:"Tiro Devanagari Marathi","Noto Serif Devanagari","Mangal",serif;
+  --f-latin:"Marcellus","Cormorant Garamond",Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html.locked,html.locked body{overflow:hidden}
+body{
+  background:var(--night);
+  color:var(--ivory);
+  font-family:var(--f-body);
+  font-size:18px;line-height:1.7;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(156,21,48,.55), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(156,21,48,.35), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23e2b04a' stroke-opacity='.07'%3E%3Ccircle cx='32' cy='32' r='10'/%3E%3Cpath d='M32 14v8M32 42v8M14 32h8M42 32h8'/%3E%3Ccircle cx='0' cy='0' r='4'/%3E%3Ccircle cx='64' cy='0' r='4'/%3E%3Ccircle cx='0' cy='64' r='4'/%3E%3Ccircle cx='64' cy='64' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed;
+}
+::selection{background:var(--gold);color:var(--night)}
+a{color:var(--gold-hi)}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+
+/* ---------- Gate (closed card) ---------- */
+#gate{position:fixed;inset:0;z-index:50;perspective:1600px;display:flex;overflow:hidden;background:var(--night)}
+#gate .glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, rgba(247,220,149,.95), rgba(242,138,23,.5) 25%, transparent 60%);opacity:0;transition:opacity 1.2s ease}
+.door{position:relative;width:50%;height:100%;transform-style:preserve-3d;transition:transform 2.2s cubic-bezier(.65,.02,.2,1);
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.35), transparent 18%, transparent 82%, rgba(0,0,0,.35)),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 2px, transparent 2px 9px),
+    linear-gradient(160deg,#6b1222,#3d0912);
+  box-shadow:inset 0 0 0 1px rgba(226,176,74,.25);
+}
+.door.l{transform-origin:left center;border-right:1px solid rgba(226,176,74,.5)}
+.door.r{transform-origin:right center;border-left:1px solid rgba(226,176,74,.5)}
+.door .frame{position:absolute;inset:clamp(14px,3vw,34px);border:2px solid var(--gold);border-radius:4px;box-shadow:inset 0 0 0 6px rgba(42,6,13,.6), inset 0 0 0 7px rgba(226,176,74,.55)}
+.door .frame::before{content:"";position:absolute;inset:14px;border:1px dashed rgba(226,176,74,.45);border-radius:999px 999px 6px 6px / 160px 160px 6px 6px}
+.door svg.motif{position:absolute;left:50%;top:50%;width:min(62%,240px);transform:translate(-50%,-50%);opacity:.9}
+.door .knock{position:absolute;top:50%;width:34px;height:34px;margin-top:-17px;border-radius:50%;border:3px solid var(--gold);box-shadow:0 2px 0 rgba(0,0,0,.4)}
+.door.l .knock{right:10%} .door.r .knock{left:10%}
+.door .studs{position:absolute;left:0;right:0;display:flex;justify-content:space-around;padding:0 18%}
+.door .studs i{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--gold-hi),#8a6116)}
+#gate.open .door.l{transform:rotateY(-112deg)}
+#gate.open .door.r{transform:rotateY(112deg)}
+#gate.open .glow{opacity:1}
+#gate.gone{opacity:0;visibility:hidden;transition:opacity .9s ease .2s, visibility 0s 1.2s}
+
+#seal{position:absolute;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:18px;border:0;background:none;color:inherit;cursor:pointer;font:inherit;padding:0}
+#seal .disc{width:clamp(130px,30vw,170px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;
+  background:radial-gradient(circle at 35% 30%, #c22545, #7d0f24 60%, #4d0814);
+  box-shadow:0 0 0 4px var(--gold), 0 0 0 9px rgba(226,176,74,.25), 0 18px 40px rgba(0,0,0,.6), inset 0 -8px 18px rgba(0,0,0,.4);
+  animation:breathe 2.6s ease-in-out infinite}
+#seal .disc span{display:block;font-family:var(--f-display);color:var(--gold-hi);line-height:1.1}
+#seal .disc .s1{font-size:.85rem;letter-spacing:.1em;opacity:.85}
+#seal .disc .s2{font-size:2.2rem;margin:4px 0}
+#seal .disc .s3{font-family:var(--f-latin);font-size:.62rem;letter-spacing:.3em;opacity:.8}
+#seal .hint{font-family:var(--f-body);color:var(--gold-hi);font-size:1rem;background:rgba(42,6,13,.75);padding:6px 16px;border-radius:999px;border:1px solid rgba(226,176,74,.4)}
+#seal:hover .disc{transform:scale(1.04)}
+#gate.open #seal{animation:sealOut .9s forwards}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 4px var(--gold),0 0 0 9px rgba(226,176,74,.25),0 18px 40px rgba(0,0,0,.6),inset 0 -8px 18px rgba(0,0,0,.4)}50%{box-shadow:0 0 0 4px var(--gold),0 0 0 16px rgba(226,176,74,.12),0 0 60px rgba(242,138,23,.45),inset 0 -8px 18px rgba(0,0,0,.4)}}
+@keyframes sealOut{to{transform:translate(-50%,-50%) scale(1.6);opacity:0;filter:blur(4px)}}
+.gate-top{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);left:0;right:0;text-align:center;z-index:3;font-family:var(--f-display);color:var(--gold-hi);font-size:1.1rem;letter-spacing:.05em;pointer-events:none;transition:opacity .6s}
+#gate.open .gate-top{opacity:0}
+
+/* ---------- Petals canvas ---------- */
+#petals{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
+
+/* ---------- Page ---------- */
+main{position:relative;z-index:1}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(56px,9vw,110px)}
+#toran{display:block;width:100%;height:auto;position:relative;z-index:2;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4))}
+.toran-sway{transform-origin:50% 0;animation:sway 6s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(.4deg)}50%{transform:rotate(-.4deg)}}
+
+.hero{text-align:center;padding-block:24px 70px}
+.invocation{font-family:var(--f-display);color:var(--gold);font-size:clamp(1.05rem,2.6vw,1.35rem);letter-spacing:.04em}
+.ganesh{width:64px;height:64px;margin:6px auto 0;display:block}
+.eyebrow{font-family:var(--f-latin);text-transform:uppercase;letter-spacing:.38em;font-size:.72rem;color:var(--gold-hi);opacity:.85}
+.arch{position:relative;width:min(420px,92%);margin:22px auto 6px;aspect-ratio:360/330;max-width:100%}
+.arch svg{width:100%;height:100%;display:block;overflow:visible}
+.names{font-family:var(--f-display);font-weight:400;line-height:1;margin:14px 0 0;text-wrap:balance;
+  font-size:clamp(3rem,13vw,6.6rem);
+  background:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 55%,#b07c22 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+.names .amp{display:block;font-size:.34em;color:var(--ivory);-webkit-text-fill-color:var(--ivory);margin:.25em 0 .1em;letter-spacing:.06em}
+.names .n{display:block}
+.latin-names{font-family:var(--f-latin);letter-spacing:.3em;font-size:clamp(.8rem,2.2vw,1rem);color:var(--ivory-dim);margin-top:16px}
+.date-pill{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;margin-top:26px;padding:12px 26px;border-radius:999px;border:1px solid rgba(226,176,74,.55);background:rgba(74,12,24,.6);font-size:1.1rem}
+.date-pill b{font-family:var(--f-display);font-weight:400;color:var(--gold-hi);font-size:1.3rem}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--marigold)}
+.scroll-cue{margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.85rem;color:var(--ivory-dim)}
+.scroll-cue i{width:2px;height:40px;background:linear-gradient(var(--gold),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold)}
+.divider::before,.divider::after{content:"";height:1px;width:min(28vw,180px);background:linear-gradient(90deg,transparent,var(--gold))}
+.divider::after{transform:scaleX(-1)}
+
+h2{font-family:var(--f-display);font-weight:400;color:var(--gold-hi);font-size:clamp(2rem,6vw,3rem);line-height:1.2;text-align:center;margin:10px 0 0;text-wrap:balance}
+.sub{text-align:center;color:var(--ivory-dim);margin:6px 0 0}
+
+/* invitation letter */
+.letter{max-width:640px;margin:34px auto 0;text-align:center;font-size:clamp(1.08rem,2.6vw,1.25rem);line-height:1.95}
+.letter p{margin:0 0 1em}
+.letter strong{font-family:var(--f-display);font-weight:400;color:var(--gold-hi);font-size:1.15em}
+.families{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;max-width:640px;margin:38px auto 0}
+.fam{text-align:center;padding:22px 14px;border:1px solid rgba(226,176,74,.35);border-radius:200px 200px 14px 14px;background:linear-gradient(180deg,rgba(156,21,48,.35),rgba(42,6,13,.3))}
+.fam small{display:block;color:var(--ivory-dim);font-size:.85rem}
+.fam b{display:block;font-family:var(--f-display);font-weight:400;color:var(--gold-hi);font-size:1.35rem;margin-top:4px}
+.fam span{display:block;font-size:.95rem;margin-top:2px}
+.knot{font-size:1.8rem;color:var(--marigold)}
+
+/* rings */
+#rings{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.ring-stage{width:min(460px,100%);margin:0 auto}
+.ring-stage svg{width:100%;height:auto;display:block;overflow:visible}
+.ring-caption{font-family:var(--f-display);font-size:clamp(1.8rem,6vw,2.8rem);color:var(--gold-hi);margin-top:10px}
+.ring-caption small{display:block;font-family:var(--f-body);font-size:1rem;color:var(--ivory-dim);margin-top:6px}
+
+/* details */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+.card{position:relative;text-align:center;padding:34px 18px 26px;border-radius:16px;background:linear-gradient(180deg,rgba(251,240,217,.07),rgba(251,240,217,.02));border:1px solid rgba(226,176,74,.4);transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s, border-color .5s;transform-style:preserve-3d}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px var(--gold);border-color:var(--gold)}
+.card .ic{width:54px;height:54px;margin:0 auto 12px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,rgba(242,138,23,.25),transparent 70%)}
+.card .ic svg{width:34px;height:34px}
+.card h3{margin:0;font-family:var(--f-latin);font-weight:400;letter-spacing:.3em;text-transform:uppercase;font-size:.72rem;color:var(--gold)}
+.card .big{font-family:var(--f-display);font-size:1.6rem;color:var(--ivory);line-height:1.3;margin-top:8px}
+.card .small{color:var(--ivory-dim);font-size:.98rem}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:999px;font:inherit;font-size:1.02rem;cursor:pointer;text-decoration:none;border:1px solid var(--gold);color:var(--night);background:linear-gradient(180deg,var(--gold-hi),var(--gold));box-shadow:0 6px 20px rgba(226,176,74,.25);transition:transform .25s, box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(226,176,74,.4)}
+.btn.ghost{background:transparent;color:var(--gold-hi)}
+
+/* countdown */
+.countdown-wrap{position:relative;display:grid;place-items:center;margin:40px auto 0;width:min(520px,100%);aspect-ratio:1;max-width:100%}
+#rangoli{position:absolute;inset:0;width:100%;height:100%;animation:spin 120s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.countdown{position:relative;display:grid;grid-template-columns:repeat(2,auto);gap:10px;padding:22px;border-radius:50%;background:radial-gradient(circle,rgba(42,6,13,.92) 60%,rgba(42,6,13,0) 72%);width:62%;aspect-ratio:1;place-content:center}
+.unit{text-align:center;min-width:72px}
+.unit b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(1.8rem,6vw,2.6rem);color:var(--gold-hi);line-height:1.1;font-variant-numeric:tabular-nums}
+.unit span{font-size:.85rem;color:var(--ivory-dim)}
+.unit b.tick{animation:tick .5s ease}
+@keyframes tick{0%{transform:translateY(-6px);opacity:.3}100%{transform:none;opacity:1}}
+
+/* programme */
+.timeline{list-style:none;padding:0;margin:44px auto 0;max-width:560px;position:relative}
+.timeline::before{content:"";position:absolute;left:94px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),rgba(226,176,74,.1))}
+.timeline li{display:grid;grid-template-columns:80px 30px minmax(0,1fr);gap:0;align-items:start;padding:12px 0}
+.timeline time{font-family:var(--f-display);color:var(--gold-hi);text-align:right;padding-right:8px;font-size:1.05rem}
+.timeline .bead{width:16px;height:16px;margin:6px 0 0 7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd27a,var(--marigold));box-shadow:0 0 0 4px rgba(242,138,23,.18)}
+.timeline h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:1.25rem;color:var(--ivory)}
+.timeline p{margin:2px 0 0;color:var(--ivory-dim);font-size:.98rem}
+
+/* blessing */
+.bless{text-align:center}
+.bless-line{min-height:3.6em;margin:22px auto 0;max-width:560px;font-size:1.2rem;color:var(--ivory);font-style:italic;transition:opacity .5s}
+.diya{width:90px;height:90px;margin:10px auto 0;display:block}
+.flame{transform-origin:50% 100%;animation:flicker 1.6s ease-in-out infinite}
+@keyframes flicker{0%,100%{transform:scale(1,1) rotate(-2deg)}30%{transform:scale(.92,1.08) rotate(2deg)}60%{transform:scale(1.05,.95) rotate(-1deg)}}
+
+footer{text-align:center;padding-block:60px calc(90px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(226,176,74,.2)}
+footer .from{font-family:var(--f-display);font-size:1.5rem;color:var(--gold-hi)}
+footer p{margin:6px 0;color:var(--ivory-dim)}
+
+#music{position:fixed;z-index:45;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);background:rgba(42,6,13,.85);color:var(--gold-hi);cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .6s}
+#music.show{opacity:1;pointer-events:auto}
+#nowplaying{position:fixed;z-index:45;right:calc(78px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 110px);padding:6px 14px;border-radius:999px;background:rgba(42,6,13,.88);border:1px solid rgba(226,176,74,.45);color:var(--ivory-dim);font-size:.85rem;line-height:1.4;opacity:0;transform:translateX(12px);transition:opacity .6s, transform .6s;pointer-events:none}
+#nowplaying b{font-family:var(--f-display);font-weight:400;color:var(--gold-hi)}
+#nowplaying.show{opacity:1;transform:none}
+#music svg{width:24px;height:24px}
+#music .bars{display:flex;gap:3px;align-items:flex-end;height:18px}
+#music .bars i{width:3px;background:var(--gold-hi);border-radius:2px;animation:eq 1s ease-in-out infinite}
+#music .bars i:nth-child(2){animation-delay:.2s}#music .bars i:nth-child(3){animation-delay:.4s}#music .bars i:nth-child(4){animation-delay:.1s}
+#music.off .bars i{animation:none;height:4px!important}
+@keyframes eq{0%,100%{height:4px}50%{height:18px}}
+
+@media (max-width:720px){
+  .cards{grid-template-columns:1fr}
+  .families{grid-template-columns:1fr;gap:10px}
+  .knot{text-align:center}
+  body{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+
+<!-- ============ CLOSED CARD / GATE ============ -->
+<div id="gate" aria-label="निमंत्रण पत्रिका">
+  <div class="glow"></div>
+  <div class="gate-top">॥ श्री गणेशाय नमः ॥</div>
+  <div class="door l">
+    <div class="frame"></div>
+    <div class="studs" style="top:14%"><i></i><i></i><i></i></div>
+    <div class="studs" style="bottom:14%"><i></i><i></i><i></i></div>
+    <svg class="motif" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#lotus"/></svg>
+    <div class="knock"></div>
+  </div>
+  <div class="door r">
+    <div class="frame"></div>
+    <div class="studs" style="top:14%"><i></i><i></i><i></i></div>
+    <div class="studs" style="bottom:14%"><i></i><i></i><i></i></div>
+    <svg class="motif" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#lotus"/></svg>
+    <div class="knock"></div>
+  </div>
+  <button id="seal" type="button" aria-label="निमंत्रण उघडा">
+    <span class="disc"><span><span class="s1">॥ शुभ ॥</span><span class="s2">त ♥ दि</span><span class="s3">19 · 12 · 2026</span></span></span>
+    <span class="hint">पत्रिका उघडण्यासाठी स्पर्श करा</span>
+  </button>
+</div>
+
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<!-- shared SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7dc95"/><stop offset=".55" stop-color="#e2b04a"/><stop offset="1" stop-color="#a8741d"/>
+    </linearGradient>
+    <radialGradient id="gMari" cx=".4" cy=".4" r=".7">
+      <stop offset="0" stop-color="#ffd46b"/><stop offset=".6" stop-color="#f28a17"/><stop offset="1" stop-color="#c25a06"/>
+    </radialGradient>
+    <symbol id="lotus" viewBox="-100 -100 200 200">
+      <g fill="none" stroke="url(#gGold)" stroke-width="2">
+        <circle r="92" stroke-dasharray="2 6"/>
+        <circle r="78"/>
+        <g id="lp"><path d="M0 -74 C 16 -50 16 -30 0 -18 C -16 -30 -16 -50 0 -74 Z"/></g>
+        <use href="#lp" transform="rotate(45)"/><use href="#lp" transform="rotate(90)"/><use href="#lp" transform="rotate(135)"/>
+        <use href="#lp" transform="rotate(180)"/><use href="#lp" transform="rotate(225)"/><use href="#lp" transform="rotate(270)"/><use href="#lp" transform="rotate(315)"/>
+        <circle r="16" fill="rgba(226,176,74,.15)"/>
+        <circle r="6" fill="#e2b04a"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main id="main">
+  <svg id="toran" class="toran-sway" viewBox="0 0 1200 110" preserveAspectRatio="xMidYMin slice" aria-hidden="true"></svg>
+
+  <!-- HERO -->
+  <header class="hero wrap">
+    <div class="invocation h-in">॥ श्री गणेशाय नमः ॥</div>
+    <svg class="ganesh h-in" viewBox="0 0 64 64" aria-hidden="true">
+      <g fill="none" stroke="url(#gGold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 6c-3 4-3 7 0 9 3-2 3-5 0-9z" fill="#f28a17" stroke="none"/>
+        <path d="M18 24c0-7 6-11 14-11s14 4 14 11"/>
+        <path d="M18 24c-6 0-9 5-8 11 1 5 6 7 10 5"/>
+        <path d="M46 24c6 0 9 5 8 11-1 5-6 7-10 5"/>
+        <path d="M24 26c0 8 3 12 8 14 0 6-2 10-6 12-3 1-5 0-5-3"/>
+        <path d="M40 26c0 8-3 12-8 14"/>
+        <circle cx="26.5" cy="27" r="1.4" fill="#f7dc95"/><circle cx="37.5" cy="27" r="1.4" fill="#f7dc95"/>
+        <path d="M27 18h10" stroke="#c22545"/>
+      </g>
+    </svg>
+    <div class="arch h-in">
+      <svg viewBox="0 0 360 330" aria-label="वधू आणि वर">
+        <defs>
+          <clipPath id="archClip"><path d="M20 330 V150 C20 60 100 12 180 12 C260 12 340 60 340 150 V330 Z"/></clipPath>
+          <radialGradient id="archBg" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#b8243f"/><stop offset=".7" stop-color="#5a0e1d"/><stop offset="1" stop-color="#3a0812"/></radialGradient>
+        </defs>
+        <path d="M20 330 V150 C20 60 100 12 180 12 C260 12 340 60 340 150 V330 Z" fill="url(#archBg)"/>
+        <g clip-path="url(#archClip)">
+          <circle cx="180" cy="120" r="120" fill="none" stroke="#e2b04a" stroke-opacity=".18" stroke-width="1" stroke-dasharray="3 7"/>
+          <circle cx="180" cy="120" r="88" fill="rgba(247,220,149,.08)"/>
+          <!-- GROOM : paper-cut gold silhouette with pheta -->
+          <g class="groom" fill="url(#gGold)">
+            <path d="M92 104 Q92 72 122 70 Q152 72 152 102 Q122 92 92 104 Z"/>
+            <path d="M150 86 q20 -22 12 -46 q-4 20 -18 30 Z"/>
+            <path d="M95 100 q-16 34 -8 82 l9 -2 q-7 -40 8 -74 Z"/>
+            <ellipse cx="122" cy="122" rx="21" ry="25"/>
+            <rect x="114" y="142" width="16" height="14"/>
+            <path d="M78 330 L84 196 Q88 160 122 154 Q156 160 160 196 L166 330 Z"/>
+            <path d="M154 180 Q174 202 186 210 l-2 12 Q164 218 146 200 Z"/>
+            <g fill="#5a0e1d">
+              <circle cx="122" cy="186" r="2.4"/><circle cx="122" cy="204" r="2.4"/><circle cx="122" cy="222" r="2.4"/>
+              <path d="M100 162 Q122 250 150 330 l6 0 Q130 250 106 160 Z" opacity=".55"/>
+              <path d="M96 96 Q122 88 150 96" fill="none" stroke="#5a0e1d" stroke-width="2"/>
+            </g>
+          </g>
+          <!-- BRIDE : nauvari drape, nath, ambada -->
+          <g class="bride" fill="url(#gGold)">
+            <circle cx="262" cy="110" r="13"/>
+            <ellipse cx="240" cy="124" rx="20" ry="24"/>
+            <path d="M214 120 Q214 88 242 88 Q272 90 274 122 L290 214 L266 170 Q264 108 240 102 Q222 106 220 134 Z"/>
+            <rect x="232" y="144" width="15" height="12"/>
+            <path d="M196 330 Q202 214 212 186 Q222 158 240 154 Q262 158 270 186 Q284 232 296 330 Z"/>
+            <path d="M214 186 Q198 206 186 212 l-1 12 Q206 220 224 200 Z"/>
+            <g fill="#5a0e1d">
+              <circle cx="231" cy="130" r="4.5" fill="none" stroke="#5a0e1d" stroke-width="1.6"/>
+              <path d="M204 300 Q246 290 290 300 l1 8 Q246 298 203 308 Z"/>
+              <path d="M262 160 Q286 230 294 330 l-8 0 Q280 236 256 164 Z" opacity=".55"/>
+              <circle cx="240" cy="108" r="2.2"/>
+            </g>
+          </g>
+          <!-- ring glint where hands meet -->
+          <g class="glint" transform="translate(186 215)">
+            <circle r="6" fill="none" stroke="#fff6dc" stroke-width="2"/>
+            <path d="M0 -18 L2 -2 L18 0 L2 2 L0 18 L-2 2 L-18 0 L-2 -2 Z" fill="#fff6dc"/>
+          </g>
+        </g>
+        <path d="M20 330 V150 C20 60 100 12 180 12 C260 12 340 60 340 150 V330" fill="none" stroke="url(#gGold)" stroke-width="3"/>
+        <path d="M34 330 V152 C34 72 106 26 180 26 C254 26 326 72 326 152 V330" fill="none" stroke="#e2b04a" stroke-opacity=".5" stroke-width="1" stroke-dasharray="1 5"/>
+        <g transform="translate(180 12)"><circle r="10" fill="url(#gMari)"/><circle r="4" fill="#ffd46b"/></g>
+      </svg>
+    </div>
+    <div class="eyebrow h-in">साखरपुडा समारंभ · Engagement Ceremony</div>
+    <h1 class="names">
+      <span class="n h-name">तेजस</span>
+      <span class="amp h-in">॥ आणि ॥</span>
+      <span class="n h-name">दिपाली</span>
+    </h1>
+    <div class="latin-names h-in">TEJAS JADHAV &nbsp;&amp;&nbsp; DIPALI BHANGRATH</div>
+    <div class="date-pill h-in"><b>१९ डिसेंबर २०२६</b><span class="dot"></span><span>शनिवार</span></div>
+    <div class="scroll-cue h-in" aria-hidden="true"><span>पुढे पाहा</span><i></i></div>
+  </header>
+
+  <!-- INVITATION -->
+  <section class="wrap" id="invite">
+    <div class="divider rv" aria-hidden="true">❋</div>
+    <h2 class="rv">सस्नेह निमंत्रण</h2>
+    <div class="letter">
+      <p class="rv">आमच्या घरी आनंदाचा मंगल क्षण येत आहे.</p>
+      <p class="rv"><strong>चि. तेजस</strong> आणि <strong>चि. सौ. कां. दिपाली</strong> यांच्या साखरपुडा समारंभास आपण सहकुटुंब, सहपरिवार उपस्थित राहून वधू-वरास शुभाशीर्वाद द्यावेत, ही नम्र विनंती.</p>
+    </div>
+    <div class="families">
+      <div class="fam rv"><small>वर</small><b>चि. तेजस</b><span>जाधव परिवार</span></div>
+      <div class="knot rv" aria-hidden="true">✦</div>
+      <div class="fam rv"><small>वधू</small><b>चि. सौ. कां. दिपाली</b><span>भांगरथ परिवार</span></div>
+    </div>
+  </section>
+
+  <!-- RINGS -->
+  <section id="rings">
+    <div class="wrap">
+      <div class="ring-stage">
+        <svg viewBox="-230 -130 460 260" aria-label="दोन अंगठ्या एकत्र येतात">
+          <defs>
+            <linearGradient id="ringG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1c4"/><stop offset=".35" stop-color="#e2b04a"/><stop offset=".7" stop-color="#9d6a17"/><stop offset="1" stop-color="#f7dc95"/></linearGradient>
+            <radialGradient id="halo"><stop offset="0" stop-color="#f7dc95" stop-opacity=".55"/><stop offset="1" stop-color="#f7dc95" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle id="ringHalo" r="120" fill="url(#halo)" opacity="0"/>
+          <g id="ringL" transform="translate(-130 0)">
+            <ellipse rx="62" ry="62" fill="none" stroke="url(#ringG)" stroke-width="13"/>
+            <ellipse rx="62" ry="62" fill="none" stroke="#fff6dc" stroke-opacity=".5" stroke-width="2" stroke-dasharray="40 300"/>
+          </g>
+          <g id="ringR" transform="translate(130 0)">
+            <ellipse rx="62" ry="62" fill="none" stroke="url(#ringG)" stroke-width="13"/>
+            <g transform="translate(0 -70)">
+              <path d="M-14 -4 L-8 -14 L8 -14 L14 -4 L0 14 Z" fill="#f4fbff" stroke="#bcd8e6" stroke-width="1.5"/>
+              <path d="M-14 -4 H14 M-8 -14 L-4 -4 L0 14 L4 -4 L8 -14" fill="none" stroke="#bcd8e6" stroke-width="1"/>
+            </g>
+          </g>
+          <!-- front arc of left ring so they appear interlocked -->
+          <path id="ringLFront" d="M58.3 21.2 A62 62 0 0 1 10.8 61.1" transform="translate(-130 0)" fill="none" stroke="url(#ringG)" stroke-width="13" opacity="0"/>
+        </svg>
+      </div>
+      <div class="ring-caption">दोन मने, एक बंधन<small>अंगठीच्या साक्षीने नव्या प्रवासाची सुरुवात</small></div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="wrap" id="details">
+    <div class="divider rv" aria-hidden="true">❋</div>
+    <h2 class="rv">शुभ मुहूर्त</h2>
+    <div class="cards">
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="#e2b04a" stroke-width="1.8"><rect x="5" y="7" width="22" height="20" rx="3"/><path d="M5 13h22M11 4v6M21 4v6"/><circle cx="16" cy="20" r="2.5" fill="#f28a17" stroke="none"/></svg></div>
+        <h3>दिनांक</h3>
+        <div class="big">१९ डिसेंबर २०२६</div>
+        <div class="small">शनिवार</div>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="#e2b04a" stroke-width="1.8"><circle cx="16" cy="16" r="11"/><path d="M16 9v7l5 3"/></svg></div>
+        <h3>वेळ</h3>
+        <div class="big">सायं. ६:०० वा.</div>
+        <div class="small">गोरज मुहूर्तावर</div>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="#e2b04a" stroke-width="1.8"><path d="M16 29s9-8.5 9-15a9 9 0 0 0-18 0c0 6.5 9 15 9 15z"/><circle cx="16" cy="14" r="3.2" fill="#f28a17" stroke="none"/></svg></div>
+        <h3>स्थळ</h3>
+        <div class="big">लवकरच कळवू</div>
+        <div class="small">स्थळाचा पत्ता लवकरच कळविण्यात येईल</div>
+      </div>
+    </div>
+    <div class="actions rv">
+      <a class="btn" id="calBtn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E0%A4%A4%E0%A5%87%E0%A4%9C%E0%A4%B8%20%E0%A4%86%E0%A4%A3%E0%A4%BF%20%E0%A4%A6%E0%A4%BF%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80%20%E0%A4%B8%E0%A4%BE%E0%A4%96%E0%A4%B0%E0%A4%AA%E0%A5%81%E0%A4%A1%E0%A4%BE%20(Tejas%20%26%20Dipali%20Engagement)&dates=20261219T123000Z/20261219T163000Z&details=Engagement%20ceremony%20of%20Tejas%20Jadhav%20and%20Dipali%20Bhangrath">
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="7" width="22" height="20" rx="3"/><path d="M5 13h22M11 4v6M21 4v6"/></svg>
+        कॅलेंडरमध्ये जोडा
+      </a>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="wrap" id="count">
+    <div class="divider rv" aria-hidden="true">❋</div>
+    <h2 class="rv">मंगल क्षणाची प्रतीक्षा</h2>
+    <p class="sub rv">रांगोळीवर स्पर्श करा, नवी रांगोळी काढली जाईल</p>
+    <div class="countdown-wrap">
+      <canvas id="rangoli" aria-hidden="true"></canvas>
+      <div class="countdown" role="timer" aria-live="off">
+        <div class="unit"><b id="cd-d">००</b><span>दिवस</span></div>
+        <div class="unit"><b id="cd-h">००</b><span>तास</span></div>
+        <div class="unit"><b id="cd-m">००</b><span>मिनिटे</span></div>
+        <div class="unit"><b id="cd-s">००</b><span>सेकंद</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMME -->
+  <section class="wrap" id="programme">
+    <div class="divider rv" aria-hidden="true">❋</div>
+    <h2 class="rv">कार्यक्रमाची रूपरेषा</h2>
+    <ol class="timeline">
+      <li class="rv"><time>६:००</time><span class="bead"></span><div><h4>स्वागत व गणेश पूजन</h4><p>औक्षण आणि मंगल वाद्यांच्या गजरात स्वागत</p></div></li>
+      <li class="rv"><time>६:३०</time><span class="bead"></span><div><h4>साखरपुडा विधी</h4><p>ओटी भरणे, साखर-पुडा आणि घरच्या वडीलधाऱ्यांचे आशीर्वाद</p></div></li>
+      <li class="rv"><time>७:००</time><span class="bead"></span><div><h4>अंगठी समारंभ</h4><p>तेजस आणि दिपाली एकमेकांना अंगठी घालतील</p></div></li>
+      <li class="rv"><time>८:००</time><span class="bead"></span><div><h4>स्नेहभोजन</h4><p>पारंपरिक महाराष्ट्रीय पंगत</p></div></li>
+    </ol>
+  </section>
+
+  <!-- BLESSING -->
+  <section class="wrap bless" id="bless">
+    <div class="divider rv" aria-hidden="true">❋</div>
+    <h2 class="rv">शुभाशीर्वाद</h2>
+    <svg class="diya rv" viewBox="0 0 90 90" aria-hidden="true">
+      <ellipse cx="45" cy="44" rx="12" ry="16" fill="#f28a17" opacity=".25"/>
+      <path class="flame" d="M45 22 C52 34 52 42 45 48 C38 42 38 34 45 22 Z" fill="url(#gMari)"/>
+      <path d="M12 54 Q45 50 78 54 Q72 74 45 76 Q18 74 12 54 Z" fill="url(#gGold)"/>
+      <path d="M20 60 Q45 66 70 60" fill="none" stroke="#5a0e1d" stroke-width="1.6"/>
+    </svg>
+    <p class="bless-line" id="blessLine">नव्या नात्याला आपल्या प्रेमाची आणि आशीर्वादाची साथ हवी आहे.</p>
+    <div class="actions">
+      <button class="btn" id="blessBtn" type="button">🌼 पुष्पवृष्टी करा</button>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <div class="from">जाधव परिवार &nbsp;·&nbsp; भांगरथ परिवार</div>
+    <p>आपल्या उपस्थितीने आमचा आनंद द्विगुणित होईल.</p>
+    <p style="font-family:var(--f-latin);letter-spacing:.3em;font-size:.75rem;margin-top:18px">WITH LOVE · 19.12.2026</p>
+  </footer>
+</main>
+
+<div id="nowplaying" aria-live="polite"><b>राग भूपाळी</b> · बासरी, तानपुरा, तबला (केहरवा)</div>
+<button id="music" type="button" aria-label="संगीत बंद/सुरू करा" title="राग भूपाळी"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HAS_GSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+const dev = n => String(n).replace(/\d/g, d => '०१२३४५६७८९'[d]);
+const $ = s => document.querySelector(s);
+document.documentElement.classList.add('locked');
+
+/* ---------- Toran (mango leaves + marigolds) ---------- */
+(function buildToran(){
+  const svg = $('#toran'); const NS='http://www.w3.org/2000/svg';
+  let h = '<path d="M0 8 Q600 34 1200 8" fill="none" stroke="#e2b04a" stroke-width="3"/>';
+  for(let i=0;i<=40;i++){
+    const x = i*30, sag = 8 + 26*Math.sin(Math.PI*x/1200);
+    if(i%2===0){
+      const len = 46 + (i%4?0:14);
+      h += `<g transform="translate(${x} ${sag}) rotate(${(i%3-1)*4})">
+        <path d="M0 0 C 11 ${len*.3} 9 ${len*.75} 0 ${len} C -9 ${len*.75} -11 ${len*.3} 0 0 Z" fill="#3d7a37"/>
+        <path d="M0 2 V ${len-4}" stroke="#7fb36a" stroke-width="1"/></g>`;
+    } else {
+      h += `<g transform="translate(${x} ${sag+4})">
+        <line y2="34" stroke="#e2b04a" stroke-width="1"/>
+        <circle cy="12" r="8" fill="url(#gMari)"/><circle cy="27" r="7" fill="#ffc533"/><circle cy="40" r="6" fill="url(#gMari)"/>
+        <circle cy="49" r="2.5" fill="#c22545"/></g>`;
+    }
+  }
+  svg.innerHTML = h;
+})();
+
+/* ---------- Petal system ---------- */
+const cv = $('#petals'), ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1, parts=[], running=false, ambient=false, lastAmb=0;
+function size(){DPR=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
+size(); addEventListener('resize',size);
+const COLS=['#f28a17','#ffb52e','#ffd46b','#e0582a','#c22545','#f7a1b0'];
+function spawn(n,x,y,burst){
+  if(RM) return;
+  for(let i=0;i<n;i++){
+    const a = Math.random()*Math.PI*2, sp = burst? 3+Math.random()*7 : 0;
+    parts.push({x:x??Math.random()*W, y:y??-20-Math.random()*H*.3, vx:Math.cos(a)*sp, vy:burst?Math.sin(a)*sp-3:1+Math.random(),
+      r:Math.random()*6.3, vr:(Math.random()-.5)*.12, s:5+Math.random()*7, c:COLS[(Math.random()*COLS.length)|0],
+      ph:Math.random()*6.3, sw:.6+Math.random()*1.2, flip:Math.random()*6.3});
+  }
+  if(!running){running=true;requestAnimationFrame(step)}
+}
+function step(t){
+  ctx.clearRect(0,0,W,H);
+  if(ambient && t-lastAmb>700 && parts.length<28){spawn(1);lastAmb=t}
+  for(let i=parts.length-1;i>=0;i--){
+    const p=parts[i];
+    p.vx*=.97; p.vy = p.vy*.97 + .06; if(p.vy>1.8) p.vy=1.8;
+    p.ph+=.03; p.x+=p.vx+Math.sin(p.ph)*p.sw; p.y+=p.vy; p.r+=p.vr; p.flip+=.05;
+    if(p.y>H+30){parts.splice(i,1);continue}
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.scale(1,Math.abs(Math.cos(p.flip))*.7+.3);
+    ctx.fillStyle=p.c;ctx.beginPath();ctx.ellipse(0,0,p.s,p.s*.55,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.18)';ctx.beginPath();ctx.ellipse(-p.s*.3,-p.s*.12,p.s*.4,p.s*.16,0,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+  }
+  if(parts.length||ambient) requestAnimationFrame(step); else {running=false;ctx.clearRect(0,0,W,H)}
+}
+
+/* ---------- Audio: classical ensemble synthesised live (WebAudio, no files) ----------
+   Raag Bhupali (auspicious evening raag, Sa Re Ga Pa Dha) on bansuri,
+   tanpura drone (Pa-Sa-Sa-Sa), tabla in Keherwa taal (8 beats), temple bells. */
+let AC=null, master=null, rev=null, schedTimer=null, musicOn=false, noiseBuf=null, tanWave=null;
+function initAudio(){
+  try{
+    AC = new (window.AudioContext||window.webkitAudioContext)();
+    master = AC.createGain(); master.gain.value=0;
+    const comp = AC.createDynamicsCompressor(); comp.threshold.value=-18; comp.ratio.value=3;
+    master.connect(comp); comp.connect(AC.destination);
+    // hall reverb from a generated impulse
+    rev = AC.createConvolver(); const len=AC.sampleRate*2.8, ib=AC.createBuffer(2,len,AC.sampleRate);
+    for(let c=0;c<2;c++){const d=ib.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2)}
+    rev.buffer=ib; const wet=AC.createGain(); wet.gain.value=.32; rev.connect(wet); wet.connect(master);
+    noiseBuf = AC.createBuffer(1,AC.sampleRate,AC.sampleRate); const nd=noiseBuf.getChannelData(0); for(let i=0;i<nd.length;i++) nd[i]=Math.random()*2-1;
+    // tanpura tone: rich harmonics with a "jawari" buzz band
+    const N=32, re=new Float32Array(N), im=new Float32Array(N);
+    for(let n=1;n<N;n++) im[n]=(1/Math.pow(n,.85))*(n>=5&&n<=13?1.6:1);
+    tanWave = AC.createPeriodicWave(re,im);
+  }catch(e){AC=null}
+}
+function route(node,send){ node.connect(master); const s=AC.createGain(); s.gain.value=send; node.connect(s); s.connect(rev); }
+function noiseSrc(){ const n=AC.createBufferSource(); n.buffer=noiseBuf; return n; }
+
+function tanpura(f,t){
+  const o=AC.createOscillator(), g=AC.createGain(), lp=AC.createBiquadFilter();
+  o.setPeriodicWave(tanWave); o.frequency.value=f;
+  lp.type='lowpass'; lp.frequency.setValueAtTime(3200,t); lp.frequency.exponentialRampToValueAtTime(700,t+3.6); lp.Q.value=2;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.055,t+.04); g.gain.exponentialRampToValueAtTime(.0006,t+3.8);
+  o.connect(lp); lp.connect(g); route(g,.5); o.start(t); o.stop(t+3.9);
+}
+function bansuri(f,t,dur,prevF){
+  const o=AC.createOscillator(), o2=AC.createOscillator(), g=AC.createGain(), g2=AC.createGain(), lp=AC.createBiquadFilter();
+  o.type='sine'; o2.type='triangle'; g2.gain.value=.22; lp.type='lowpass'; lp.frequency.value=2600;
+  [o.frequency,o2.frequency].forEach(p=>{
+    if(prevF){ p.setValueAtTime(prevF,t); p.exponentialRampToValueAtTime(f,t+.11); }   // meend: glide between swaras
+    else { p.setValueAtTime(f*.965,t); p.exponentialRampToValueAtTime(f,t+.07); }
+  });
+  if(dur>.6){ // gentle vibrato on held notes
+    const lfo=AC.createOscillator(), ld=AC.createGain(); lfo.frequency.value=5.3;
+    ld.gain.setValueAtTime(0,t); ld.gain.linearRampToValueAtTime(f*.009,t+Math.min(.9,dur*.6));
+    lfo.connect(ld); ld.connect(o.frequency); ld.connect(o2.frequency); lfo.start(t); lfo.stop(t+dur+.2);
+  }
+  const end=t+dur;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.12,t+.06); g.gain.linearRampToValueAtTime(.095,t+Math.max(.1,dur*.7));
+  g.gain.setValueAtTime(.095,end-.02); g.gain.linearRampToValueAtTime(0,end+.09);
+  o.connect(g); o2.connect(g2); g2.connect(lp); lp.connect(g); route(g,.6);
+  o.start(t); o2.start(t); o.stop(end+.12); o2.stop(end+.12);
+  // breath at the attack
+  const n=noiseSrc(), bp=AC.createBiquadFilter(), ng=AC.createGain();
+  bp.type='bandpass'; bp.frequency.value=f*2.2; bp.Q.value=1.2;
+  ng.gain.setValueAtTime(.05,t); ng.gain.exponentialRampToValueAtTime(.001,t+.22);
+  n.connect(bp); bp.connect(ng); route(ng,.3); n.start(t); n.stop(t+.25);
+}
+const TABLA_SA=293.66;
+function dayan(t,vol,decay=.55){
+  [[1,1],[2,.45],[3,.3],[4.2,.12]].forEach(([m,a])=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=TABLA_SA*m;
+    g.gain.setValueAtTime(vol*a,t);g.gain.exponentialRampToValueAtTime(.0005,t+decay/(m*.5+.5));o.connect(g);route(g,.25);o.start(t);o.stop(t+decay+.05)});
+  click(t,vol*.35,.03,3000);
+}
+function bayan(t,vol,rise){
+  const o=AC.createOscillator(),g=AC.createGain(); o.type='sine';
+  if(rise){o.frequency.setValueAtTime(72,t);o.frequency.exponentialRampToValueAtTime(108,t+.25)}
+  else{o.frequency.setValueAtTime(96,t);o.frequency.exponentialRampToValueAtTime(64,t+.35)}
+  g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0008,t+.7);o.connect(g);route(g,.2);o.start(t);o.stop(t+.75);
+}
+function click(t,vol,dur,hp){
+  const n=noiseSrc(),f=AC.createBiquadFilter(),g=AC.createGain(); f.type='highpass'; f.frequency.value=hp||1800;
+  g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(.0008,t+dur); n.connect(f); f.connect(g); route(g,.15); n.start(t); n.stop(t+dur+.02);
+}
+function tabla(bol,t,sam){
+  const a=sam?1.25:1;
+  switch(bol){
+    case 'Dha': bayan(t,.42*a,true); dayan(t,.2*a); break;
+    case 'Dhi': bayan(t,.36,true); dayan(t,.14,.3); break;
+    case 'Ge':  bayan(t,.4,true); break;
+    case 'Na':  dayan(t,.18); break;
+    case 'Ti':  click(t,.16,.05,2500); dayan(t,.06,.08); break;
+    case 'Ka':  click(t,.14,.04,900); break;
+    case 'Ra':  click(t,.09,.035,2800); break;
+  }
+}
+function bell(t,f=660,vol=.22){
+  [1,2.76,5.4,8.93].forEach((m,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=f*m;
+    g.gain.setValueAtTime(vol/(i+1),t);g.gain.exponentialRampToValueAtTime(.0005,t+3.5/(i*.6+1));o.connect(g);route(g,.6);o.start(t);o.stop(t+4)});
+}
+
+/* Raag Bhupali composition (beats; '-' is a rest) */
+const SWAR={S:1,R:9/8,G:5/4,P:3/2,D:5/3,S2:2,R2:9/4,G2:5/2,D1:5/6,P1:3/4};
+const MEL_SA=293.66, TAN_SA=146.83, BEAT=60/76;
+const INTRO=[['S',3],['D1',1],['S',2],['R',2],['G',3],['R',1],['S',4]];           // aalaap, before tabla
+const PH={
+  a:[['G',1],['R',1],['S',1],['D1',1],['S',2],['R',1],['G',1]],
+  b:[['G',1],['P',1],['D',1],['S2',2],['D',1],['P',2]],
+  c:[['G',1],['P',1],['D',1],['P',1],['G',1],['R',1],['S',2]],
+  d:[['S2',.5],['R2',.5],['S2',1],['D',1],['P',1],['G',1],['R',1],['S',1],['-',1]],
+  e:[['D1',1],['S',1],['R',1],['G',2],['P',1],['G',1],['R',1]],
+  f:[['P',1],['D',1],['S2',1],['R2',1],['S2',2],['D',.5],['P',.5],['G',1]],
+  g:[['G',.5],['P',.5],['G',1],['R',1],['S',1],['D1',1],['S',3]],
+};
+const MEL=[...INTRO]; const LOOP_START=MEL.length;
+'abcdefg'.split('').forEach(k=>MEL.push(...PH[k]));
+const INTRO_BEATS=16;
+const KEHERWA=['Dha','Ge','Na','Ti','Na','Ka','Dhi','Na'];
+const TAN_SEQ=[TAN_SA*3/4, TAN_SA, TAN_SA, TAN_SA/2];   // Pa, Sa, Sa, low Sa
+let mStep=0, nextT=0, melIdx=0, melStep=0, prevF=null;   // grid = half beats
+
+function schedule(){
+  while(nextT < AC.currentTime + .3){
+    if(mStep%2===0){
+      const b=mStep/2;
+      tanpura(TAN_SEQ[b%4], nextT);
+      if(b>=INTRO_BEATS){
+        const tb=b-INTRO_BEATS, cyc=Math.floor(tb/8), pos=tb%8;
+        tabla(KEHERWA[pos], nextT, pos===0);
+        if(cyc%4===3 && pos===7) tabla('Ra', nextT+BEAT/2);   // small tirakita-style filler before sam
+      }
+    } else if(mStep/2>INTRO_BEATS && ((mStep-1)/2-INTRO_BEATS)%8===3){
+      tabla('Ra', nextT);                                       // off-beat ornament after "Ti"
+    }
+    if(mStep===melStep){
+      const [n,beats]=MEL[melIdx];
+      if(n!=='-'){ const f=SWAR[n]*MEL_SA; bansuri(f,nextT,beats*BEAT,prevF); prevF=f; } else prevF=null;
+      melStep += Math.round(beats*2);
+      melIdx++; if(melIdx>=MEL.length) melIdx=LOOP_START;
+    }
+    mStep++; nextT += BEAT/2;
+  }
+}
+function startEnsemble(){ if(!AC||schedTimer) return; nextT=AC.currentTime+.12; schedTimer=setInterval(schedule,50); schedule(); }
+function stopEnsemble(){ clearInterval(schedTimer); schedTimer=null; }
+function startDrone(){ startEnsemble(); }
+function setMusic(on){
+  if(!AC) return; musicOn=on;
+  if(AC.state==='suspended') AC.resume();
+  master.gain.cancelScheduledValues(AC.currentTime);
+  master.gain.setValueAtTime(master.gain.value, AC.currentTime);
+  master.gain.linearRampToValueAtTime(on?.8:0, AC.currentTime+.8);
+  if(on) startEnsemble(); else setTimeout(()=>{ if(!musicOn) stopEnsemble(); }, 900);
+  $('#music').classList.toggle('off',!on);
+  const np=$('#nowplaying'); if(np){ np.classList.toggle('show',on); clearTimeout(np._t); if(on) np._t=setTimeout(()=>np.classList.remove('show'),5000); }
+}
+$('#music').addEventListener('click',()=>setMusic(!musicOn));
+
+/* ---------- Lenis smooth scroll ---------- */
+let lenis=null;
+if(!RM && window.Lenis){
+  lenis = new Lenis({duration:1.25, smoothWheel:true});
+  lenis.stop();
+  if(HAS_GSAP){ lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t=>lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0); }
+  else { const r=t=>{lenis.raf(t);requestAnimationFrame(r)}; requestAnimationFrame(r); }
+}
+
+/* ---------- Gate open ---------- */
+let opened=false;
+function openGate(){
+  if(opened) return; opened=true;
+  initAudio();
+  if(AC){ bell(AC.currentTime+.05); bell(AC.currentTime+.9,880,.14); startDrone(); setMusic(true); }
+  const gate=$('#gate'); gate.classList.add('open');
+  setTimeout(()=>{ spawn(140, W/2, H/2, true); }, 500);
+  setTimeout(()=>{ gate.classList.add('gone'); document.documentElement.classList.remove('locked'); lenis&&lenis.start(); $('#music').classList.add('show'); heroIn(); ambient=true; if(!running) spawn(0); }, RM?50:1700);
+  setTimeout(()=>{ gate.remove(); HAS_GSAP&&ScrollTrigger.refresh(); }, RM?400:3200);
+}
+$('#seal').addEventListener('click',openGate);
+$('#gate').addEventListener('click',e=>{ if(e.target.closest('.door')) openGate(); });
+addEventListener('keydown',e=>{ if(!opened && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); openGate(); } });
+
+/* ---------- Hero entrance ---------- */
+function heroIn(){
+  if(!HAS_GSAP||RM) return;
+  const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.from('.hero .invocation',{y:-20,opacity:0,duration:.8})
+    .from('.hero .ganesh',{scale:.4,opacity:0,rotate:-20,duration:.9},'-=.5')
+    .from('.arch',{y:60,opacity:0,scale:.92,duration:1.2},'-=.5')
+    .from('.groom',{x:-60,opacity:0,duration:1.2},'-=.8')
+    .from('.bride',{x:60,opacity:0,duration:1.2},'<')
+    .from('.glint',{scale:0,opacity:0,rotate:-90,transformOrigin:'center',duration:.7,ease:'back.out(3)'},'-=.3')
+    .from('.hero .eyebrow',{opacity:0,letterSpacing:'.8em',duration:1},'-=.4')
+    .from('.h-name',{y:60,opacity:0,filter:'blur(10px)',stagger:.25,duration:1.1},'-=.7')
+    .from('.names .amp',{scale:.6,opacity:0,duration:.6},'-=.8')
+    .from('.latin-names,.date-pill,.scroll-cue',{y:20,opacity:0,stagger:.12,duration:.7},'-=.4');
+  gsap.to('.glint',{rotate:45,repeat:-1,yoyo:true,duration:1.6,ease:'sine.inOut',transformOrigin:'center',delay:4});
+}
+
+/* ---------- Scroll reveals & rings ---------- */
+if(HAS_GSAP && !RM){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.rv').forEach(el=>{
+    gsap.from(el,{y:40,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+  });
+  gsap.utils.toArray('.card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      gsap.to(card,{rotateY:x*10,rotateX:-y*10,duration:.4,transformPerspective:700})});
+    card.addEventListener('pointerleave',()=>gsap.to(card,{rotateX:0,rotateY:0,duration:.6}));
+  });
+  gsap.to('.arch svg',{y:-40,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  const rt=gsap.timeline({scrollTrigger:{trigger:'#rings',start:'top top',end:'+=90%',scrub:1,pin:true}});
+  rt.fromTo('#ringL',{attr:{transform:'translate(-150 0) rotate(-30)'}},{attr:{transform:'translate(-38 0) rotate(0)'},ease:'power2.inOut'},0)
+    .fromTo('#ringR',{attr:{transform:'translate(150 0) rotate(30)'}},{attr:{transform:'translate(38 0) rotate(0)'},ease:'power2.inOut'},0)
+    .fromTo('#ringLFront',{attr:{transform:'translate(-150 0) rotate(-30)'}},{attr:{transform:'translate(-38 0) rotate(0)'},ease:'power2.inOut'},0)
+    .to('#ringLFront',{opacity:1,duration:.05},.6)
+    .to('#ringHalo',{opacity:1,duration:.3},.7)
+    .from('.ring-caption',{opacity:0,y:30,duration:.3},.65);
+  let burst=false;
+  ScrollTrigger.create({trigger:'#rings',start:'top top',end:'+=90%',onUpdate:s=>{ if(s.progress>.8&&!burst){burst=true;const r=$('.ring-stage').getBoundingClientRect();spawn(70,r.left+r.width/2,r.top+r.height/2,true); if(AC&&musicOn) bell(AC.currentTime,990,.12);} }});
+} else {
+  // static resting state: rings already joined
+  $('#ringL').setAttribute('transform','translate(-38 0)');$('#ringR').setAttribute('transform','translate(38 0)');
+  const f=$('#ringLFront'); f.setAttribute('transform','translate(-38 0)'); f.style.opacity=1; $('#ringHalo').style.opacity=1;
+}
+
+/* ---------- Countdown ---------- */
+const TARGET = new Date('2026-12-19T18:00:00+05:30').getTime();
+const els={d:$('#cd-d'),h:$('#cd-h'),m:$('#cd-m'),s:$('#cd-s')}; const prev={};
+function pad(n){return dev(String(n).padStart(2,'0'))}
+function tickCD(){
+  let diff=Math.max(0,TARGET-Date.now());
+  const v={d:Math.floor(diff/864e5),h:Math.floor(diff/36e5)%24,m:Math.floor(diff/6e4)%60,s:Math.floor(diff/1e3)%60};
+  for(const k in v){ if(prev[k]!==v[k]){ els[k].textContent=pad(v[k]); if(prev[k]!==undefined){els[k].classList.remove('tick');void els[k].offsetWidth;els[k].classList.add('tick')} prev[k]=v[k]; } }
+  if(diff===0){ $('.countdown').innerHTML='<div class="unit" style="grid-column:1/-1"><b>शुभ दिन!</b><span>आज साखरपुडा</span></div>'; clearInterval(cdI); }
+}
+tickCD(); const cdI=setInterval(tickCD,1000);
+
+/* ---------- Rangoli ---------- */
+const rc=$('#rangoli'), rx=rc.getContext('2d');
+const PALS=[['#f28a17','#c22545','#ffd46b','#3d7a37','#fbf0d9','#e0582a'],['#c22545','#ffd46b','#2f8f8a','#f28a17','#fbf0d9','#8a2be2'],['#ffd46b','#e0582a','#3d7a37','#f7a1b0','#fbf0d9','#c22545']];
+let rangoliSeed=0, rAnim=null;
+function petal(len,wid){rx.beginPath();rx.moveTo(0,0);rx.quadraticCurveTo(wid,len*.5,0,len);rx.quadraticCurveTo(-wid,len*.5,0,0);rx.closePath()}
+function drawRangoli(animate){
+  const s=rc.clientWidth||400, d=Math.min(2,devicePixelRatio||1); rc.width=s*d; rc.height=s*d; rx.setTransform(d,0,0,d,s/2,s/2);
+  const R=s/2, pal=PALS[rangoliSeed%PALS.length], sym=[8,12,16][rangoliSeed%3];
+  const layers=[
+    {t:'dots',r:R*.97,n:sym*6,c:pal[4],sz:1.8},
+    {t:'petal',r:R*.62,len:R*.3,w:R*.1,n:sym,c:pal[0],off:.5},
+    {t:'petal',r:R*.62,len:R*.24,w:R*.06,n:sym,c:pal[2],off:0},
+    {t:'ring',r:R*.6,c:pal[4],lw:2},
+    {t:'petal',r:R*.4,len:R*.2,w:R*.09,n:sym,c:pal[1],off:0},
+    {t:'leaf',r:R*.45,len:R*.14,n:sym*2,c:pal[3]},
+    {t:'dots',r:R*.88,n:sym*2,c:pal[5],sz:4},
+    {t:'petal',r:R*.82,len:R*.13,w:R*.05,n:sym*2,c:pal[5],off:.5},
+  ];
+  const total=layers.length; let start=null;
+  cancelAnimationFrame(rAnim);
+  function frame(ts){
+    if(!start) start=ts; const p = animate? Math.min(1,(ts-start)/2600) : 1;
+    rx.clearRect(-R,-R,s,s);
+    layers.forEach((L,i)=>{
+      const lp=Math.max(0,Math.min(1,p*total-i)); if(lp<=0) return;
+      const n=Math.ceil(L.n*lp);
+      rx.fillStyle=L.c; rx.strokeStyle=L.c;
+      if(L.t==='ring'){rx.lineWidth=L.lw;rx.beginPath();rx.arc(0,0,L.r,0,Math.PI*2*lp);rx.stroke();return}
+      for(let k=0;k<n;k++){
+        const a=(k+(L.off||0))/L.n*Math.PI*2;
+        rx.save();rx.rotate(a);
+        if(L.t==='dots'){rx.beginPath();rx.arc(0,-L.r,L.sz,0,Math.PI*2);rx.fill()}
+        else if(L.t==='petal'){rx.translate(0,-L.r);petal(L.len,L.w);rx.globalAlpha=.92;rx.fill();rx.globalAlpha=1;rx.strokeStyle='rgba(251,240,217,.55)';rx.lineWidth=1;rx.stroke()}
+        else if(L.t==='leaf'){rx.translate(0,-L.r);rx.rotate(.5);petal(L.len,L.len*.3);rx.fill()}
+        rx.restore();
+      }
+    });
+    rx.fillStyle=pal[0];rx.beginPath();rx.arc(0,0,R*.06,0,Math.PI*2);rx.fill();
+    if(p<1) rAnim=requestAnimationFrame(frame);
+  }
+  rAnim=requestAnimationFrame(frame);
+}
+let rangoliDrawn=false;
+const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting&&!rangoliDrawn){rangoliDrawn=true;drawRangoli(!RM)} })},{threshold:.3});
+io.observe(rc);
+drawRangoli(false); // resting state so it is never blank
+$('.countdown-wrap').addEventListener('click',()=>{rangoliSeed++;drawRangoli(!RM); if(AC&&musicOn) bell(AC.currentTime,770,.08)});
+addEventListener('resize',()=>drawRangoli(false));
+
+/* ---------- Blessings ---------- */
+const BL=['तेजस आणि दिपाली, तुमचे नाते साखरेसारखे गोड राहो.','सात जन्मांची साथ आणि प्रत्येक दिवस आनंदाचा जावो.','दोन घरांचे एक कुटुंब होवो, प्रेम सदैव वाढत राहो.','श्री गणेशाच्या कृपेने नव्या प्रवासाला मंगल सुरुवात होवो.','एकमेकांच्या हातात हात, आयुष्यभर अशीच साथ.'];
+let bi=0;
+$('#blessBtn').addEventListener('click',e=>{
+  const r=e.currentTarget.getBoundingClientRect();
+  spawn(90,r.left+r.width/2,r.top,true); spawn(40);
+  const line=$('#blessLine'); line.style.opacity=0;
+  setTimeout(()=>{line.textContent=BL[bi++%BL.length];line.style.opacity=1},350);
+  if(AC&&musicOn) bell(AC.currentTime,660,.12);
+});
+})();
+</script>
+
+</body>
+</html>
